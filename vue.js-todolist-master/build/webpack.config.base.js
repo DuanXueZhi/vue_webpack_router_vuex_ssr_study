@@ -10,7 +10,7 @@ const config = {
   //输出
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, '../dist')
   },
   //webpack原生只支持js文件类型，只支持ES5语法，我们使用以.vue文件名结尾的文件时，需要为其指定loader
   module: {
