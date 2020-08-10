@@ -63,7 +63,7 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
 } else { // 正式环境
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../src/index.js'),
+      app: path.join(__dirname, '../client/index.js'),
       vendor: ['vue']
     },
     output: {

@@ -6,7 +6,7 @@ const path = require('path')
 
 const config = {
   //入口， __dirname 是当前文件所在目录
-  entry: path.join(__dirname, '../src/index.js'),
+  entry: path.join(__dirname, '../client/index.js'),
   //输出
   output: {
     filename: 'bundle.[hash:8].js',
@@ -27,7 +27,7 @@ const config = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: __dirname + 'node_modules', // 排除node_modules内容 __dirname写法防止'bindings' of null报错
-        include: __dirname + 'src',
+        include: __dirname + 'client',
         options: {
           presets: ['env']
         }
