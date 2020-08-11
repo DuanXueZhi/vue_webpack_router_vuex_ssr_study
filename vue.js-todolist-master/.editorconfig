@@ -1,0 +1,10 @@
+# 规范编辑器的配置
+root = true # 项目配置文件指定
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2 # tab键长度
+indent_style = space # tab键为空格
+insert_final_newline = true # 保存文件自动增加空行
+trim_trailing_whitespace = true # 行结尾空格去掉
