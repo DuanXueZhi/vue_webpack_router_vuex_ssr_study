@@ -43,7 +43,14 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
           test: /\.styl/,
           use: [
             'vue-style-loader',
-            'css-loader',
+            { // 全局设置
+              loader: 'css-loader',
+              // options: {
+              //   modules: {
+              //     localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]' // 设置类名
+              //   }
+              // }
+            },
             {
               loader: 'postcss-loader',
               options: { sourceMap: true }
