@@ -1,5 +1,5 @@
 <template>
-  <header :class="$style.mainHeader">
+  <header class="main-header">
     <h1>Todo</h1>
   </header>
 </template>
@@ -16,7 +16,7 @@
   }
 </script>
 
-<style lang="stylus" module>
+<style lang="stylus" scoped>
   // module：使用cssModules的方式编译，类似指定loader，需要用$style对象获取
   .main-header
     text-align center
