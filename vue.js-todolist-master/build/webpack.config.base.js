@@ -3,6 +3,9 @@
  *  explain：所有webpack（环境）依赖的配置
  */
 const path = require('path')
+const createVueLoaderOptions = require('./vue-loader.config')
+
+const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
   //入口， __dirname 是当前文件所在目录
@@ -17,7 +20,8 @@ const config = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: createVueLoaderOptions(isDev)
       },
       {
         test: /\.jsx$/,
