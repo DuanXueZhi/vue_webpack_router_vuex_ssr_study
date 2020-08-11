@@ -5,15 +5,15 @@
 </template>
 
 <script>
-  export default {
-    // computed: { // 相当于在计算属性中增加$style
-    //   $style() {
-    //     return {
-    //       minHeader: ''
-    //     }
-    //   }
-    // }
-  }
+export default {
+  // computed: { // 相当于在计算属性中增加$style
+  //   $style() {
+  //     return {
+  //       minHeader: ''
+  //     }
+  //   }
+  // }
+}
 </script>
 
 <style lang="stylus" scoped>

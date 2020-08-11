@@ -1,76 +1,76 @@
 <template>
   <section class="real-app">
     <input
-            type="text"
-            class="add-input"
-            autofocus="autofocus"
-            placeholder="接下来做什么"
-            @keyup.enter="addTodo"
+      type="text"
+      class="add-input"
+      autofocus="autofocus"
+      placeholder="接下来做什么"
+      @keyup.enter="addTodo"
     >
     <Item
-            v-for="todo in filterTodos"
-            :todo="todo"
-            :key="todo.id"
-            @del="deleteTodo"
+      v-for="todo in filterTodos"
+      :key="todo.id"
+      :todo="todo"
+      @del="deleteTodo"
     />
     <Tabs
-            :filter="filter"
-            :todos="todos"
-            @toggle="toggleFilter"
-            @clearAll="clearAllCompletedTodo"
+      :filter="filter"
+      :todos="todos"
+      @toggle="toggleFilter"
+      @clearAll="clearAllCompletedTodo"
     />
   </section>
 </template>
 
 <script>
-  import Item from './item.vue';
-  import Tabs from './tabs.vue';
-  import {constants} from 'crypto';
+import Item from './item.vue'
+import Tabs from './tabs.vue'
+// import { constants } from 'crypto'
 
-  let id = 0;
+let id = 0
 
-  export default {
-    data() {
-      return {
-        todos: [],
-        filter: 'all'
+export default {
+  components: {
+    Item,
+    Tabs
+  },
+  data () {
+    return {
+      todos: [],
+      filter: 'all'
+    }
+  },
+  computed: {
+    filterTodos () {
+      if (this.filter === 'all') {
+        return this.todos
       }
-    },
-    components: {
-      Item,
-      Tabs
-    },
-    computed: {
-      filterTodos() {
-        if (this.filter === 'all') {
-          return this.todos;
-        }
-        const filterCompleted = this.filter === 'completed';
-        return this.todos.filter(todo => todo.completed === filterCompleted);
-      }
-    },
-    methods: {
-      addTodo(e) {
-        this.todos.unshift({
-          id: id++,
-          content: e.target.value,
-          completed: false
-        });
+      const filterCompleted = this.filter === 'completed'
+      return this.todos.filter(todo => todo.completed === filterCompleted)
+    }
+  },
+  methods: {
+    addTodo (e) {
+      this.todos.unshift({
+        id: id++,
+        content: e.target.value,
+        completed: false
+      })
 
-        e.target.value = '';
-      },
-      deleteTodo(id) {
-        this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1);
-      },
-      toggleFilter(state) {
-        console.log(state);
-        this.filter = state;
-      },
-      clearAllCompletedTodo() {
-        this.todos = this.todos.filter(todo => todo.completed === false);
-      }
+      e.target.value = ''
+    },
+    deleteTodo (id) {
+      this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1)
+    },
+    toggleFilter (state) {
+      console.log(state)
+      this.filter = state
+    },
+    clearAllCompletedTodo () {
+      this.todos = this.todos.filter(todo => todo.completed === false)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -96,5 +96,3 @@
     border none
     box-shadow inset 0 -2px 1px rgba(0, 0, 0, 0.03)
 </style>
-
-
