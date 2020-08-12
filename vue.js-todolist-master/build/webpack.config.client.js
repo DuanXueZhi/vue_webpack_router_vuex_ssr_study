@@ -35,6 +35,7 @@ let config
 
 if (isDev) { // 开发环境 // 合理合并base中的配置
   config = merge(baseConfig, {
+    devtool: '#cheap-module-eval-source-map',
     module: {
       rules: [
         {
