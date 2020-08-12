@@ -71,7 +71,7 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
   config = merge(baseConfig, {
     entry: {
       app: path.join(__dirname, '../client/index.js'),
-      vendor: ['vue']
+      // vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -101,6 +101,12 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
           ]
         }
       ]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all' // 默认打包到vendorChunk
+      },
+      runtimeChunk: true
     },
     plugins: definePlugins.concat([
       new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
