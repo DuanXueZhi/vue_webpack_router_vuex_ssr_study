@@ -19,9 +19,9 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(vue|js|jsx)/,
+        test: /\.(vue|js|jsx)$/,
         loader: 'eslint-loader',
-        exclude: /node_module/,
+        exclude: __dirname + 'node_modules',
         enforce: 'pre' // 预处理（在使用响应loader之前处理）
       },
       {
