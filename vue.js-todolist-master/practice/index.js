@@ -2,7 +2,8 @@
  *  * Created by dxz on 2020/8/12-9:57.
  * explain：
  */
-import './instance'
+// import './instance'
+import './lifecycle'
 // // const div = document.createElement('div')
 // // document.body.appendChild(div)
 //
