@@ -3,4 +3,5 @@
  * explain：
  */
 // import './define'
-import './extend'
+// import './extend'
+import './v-model'
