@@ -6,7 +6,8 @@
 // import './lifecycle'
 // import './data-binding'
 // import './computed'
-import './directive'
+// import './directive'
+import './component'
 // // const div = document.createElement('div')
 // // document.body.appendChild(div)
 //
