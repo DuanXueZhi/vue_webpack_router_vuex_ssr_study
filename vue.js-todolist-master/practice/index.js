@@ -4,7 +4,8 @@
  */
 // import './instance'
 // import './lifecycle'
-import './data-binding'
+// import './data-binding'
+import './computed'
 // // const div = document.createElement('div')
 // // document.body.appendChild(div)
 //
