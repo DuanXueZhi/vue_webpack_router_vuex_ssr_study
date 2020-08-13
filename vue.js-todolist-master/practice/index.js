@@ -3,7 +3,8 @@
  * explain：
  */
 // import './instance'
-import './lifecycle'
+// import './lifecycle'
+import './data-binding'
 // // const div = document.createElement('div')
 // // document.body.appendChild(div)
 //
