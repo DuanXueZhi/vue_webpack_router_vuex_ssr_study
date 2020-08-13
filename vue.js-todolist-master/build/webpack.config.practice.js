@@ -63,7 +63,7 @@ config = merge(baseConfig, {
   // import Vue from 'vue' // 指定vue导入文件
   resolve: {
     alias: {
-      'vue': path.join('../node_modules/vue/dist/vue.esm.js')
+      'vue': path.join(__dirname, '../node_modules/vue/dist/vue.esm.js')
     }
   },
   plugins: definePlugins.concat([
