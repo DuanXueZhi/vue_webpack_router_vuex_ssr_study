@@ -29,21 +29,19 @@ const devServer = { // 端口ip：默认port: 8080，host: localhost
   hot: true
 }
 
-let config
-
-config = merge(baseConfig, {
+const config = merge(baseConfig, {
   entry: path.join(__dirname, '../practice/index.js'),
   devtool: '#cheap-module-eval-source-map',
   module: {
     rules: [
       {
-        //css预处理器，使用模块化的方式写css代码
-        //stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
+        // css预处理器，使用模块化的方式写css代码
+        // stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
         test: /\.styl/,
         use: [
           'vue-style-loader',
           { // 全局设置
-            loader: 'css-loader',
+            loader: 'css-loader'
             // options: {
             //   modules: {
             //     localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]' // 设置类名
@@ -63,12 +61,12 @@ config = merge(baseConfig, {
   // import Vue from 'vue' // 指定vue导入文件
   resolve: {
     alias: {
-      'vue': path.join(__dirname, '../node_modules/vue/dist/vue.esm.js')
+      vue: path.join(__dirname, '../node_modules/vue/dist/vue.esm.js')
     }
   },
   plugins: definePlugins.concat([
     new webpack.HotModuleReplacementPlugin(),
-    new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
+    new VueLoaderPlugin() // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
     // new webpack.NoEmitOnErrorsPlugin() // webpack4 内置
   ])
 })
