@@ -31,7 +31,7 @@ const devServer = { // 端口ip：默认8080，localhost
     errors: true
   },
   historyApiFallback: {
-    index: '/public/index.html' // 指向生成的index.html
+    index: '/public/index.html' // 指向生成的index.html，与base中publicPath拼接
   },
   hot: true
 }

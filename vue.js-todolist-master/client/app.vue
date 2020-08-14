@@ -1,8 +1,17 @@
 <template>
   <div id="app">
     <Header />
-<!--    <Todo></Todo>-->
-    <router-view></router-view>
+    <router-link to="/app">
+      app
+    </router-link>
+    <router-link to="/login">
+      login
+    </router-link>
+    <router-link to="/login/exact">
+      login exact
+    </router-link>
+    <!--    <Todo></Todo>-->
+    <router-view />
     <Footer />
   </div>
 </template>
