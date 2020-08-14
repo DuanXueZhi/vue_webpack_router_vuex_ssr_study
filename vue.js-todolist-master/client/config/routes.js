@@ -18,8 +18,10 @@ export default [
       a: Test
     },
     name: 'app',
-    meta: { // 通过.meta获取
-      title: 'this app'
+    meta: { title: 'this app' }, // 通过.meta获取
+    beforeEnter (to, from, next) {
+      console.log('app route beforeEnter')
+      next()
     },
     children: [
       {
