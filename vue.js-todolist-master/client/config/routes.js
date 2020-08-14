@@ -34,10 +34,14 @@ export default [
     // props: {
     //   id: 123
     // },
-    props: (route) => ({ id: route.query.b }), // 根据url路径传参
+    // 根据url路径传参
+    // props: (route) => ({ id: route.query.id }), // component仅一个
+    props: { // components多个内容key值一一对应
+      default: (route) => ({ id: route.query.b }) // 访问方式http://localhost:8080/base/login/abc?b=123
+    },
     components: {
-      default: Login,
-      a: Todo
+      default: Login, // 【default：默认router-view】
+      a: Todo // 【a：router-view name="a"】
     }
   },
   {
