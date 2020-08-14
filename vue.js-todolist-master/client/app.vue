@@ -4,7 +4,7 @@
     <router-link :to="{ name: 'app' }">
       app
     </router-link>
-    <router-link to="/login">
+    <router-link to="/login/abc">
       login
     </router-link>
     <router-link to="/login/exact">

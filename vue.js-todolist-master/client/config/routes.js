@@ -26,6 +26,11 @@ export default [
   },
   {
     path: '/login/:id',
+    // props: true, // 组件可以使用类似props方式使用id【与组件合并（不需要使用this.$route.id）】
+    // props: {
+    //   id: 123
+    // },
+    props: (route) => ({ id: route.query.b }), // 根据url路径传参
     component: Login
   },
   {
