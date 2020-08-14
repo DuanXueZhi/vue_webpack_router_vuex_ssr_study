@@ -5,7 +5,6 @@
 import Router from 'vue-router'
 
 import routes from './routes'
-import {saveScrollPosition} from "vue-router/src/util/scroll";
 
 // const router = new Router({
 //   routes
