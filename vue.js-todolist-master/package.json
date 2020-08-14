@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/carrieguo/vue.js-learn#readme",
   "dependencies": {
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
