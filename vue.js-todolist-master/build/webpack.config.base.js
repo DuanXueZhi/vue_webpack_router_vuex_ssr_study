@@ -10,20 +10,21 @@ const isDev = process.env.NODE_ENV === 'development'
 const config = {
   mode: process.env.NODE_ENV || 'production', // development || production || none
   target: 'web', // String | function(compiler编译者) // 为目标（target）指定环境【默认为web】
-  //入口， __dirname 是当前文件所在目录
+  // 入口， __dirname 是当前文件所在目录
   entry: path.join(__dirname, '../client/index.js'),
-  //输出
+  // 输出
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: '/public/'
   },
-  //webpack原生只支持js文件类型，只支持ES5语法，我们使用以.vue文件名结尾的文件时，需要为其指定loader
+  // webpack原生只支持js文件类型，只支持ES5语法，我们使用以.vue文件名结尾的文件时，需要为其指定loader
   module: {
     rules: [
       {
         test: /\.(vue|js|jsx)$/,
         loader: 'eslint-loader',
-        exclude: __dirname + 'node_modules',
+        exclude: path.join(__dirname, 'node_modules'),
         enforce: 'pre' // 预处理（在使用响应loader之前处理）
       },
       {
@@ -38,13 +39,13 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: __dirname + 'node_modules', // 排除node_modules内容 __dirname写法防止'bindings' of null报错
-        include: __dirname + 'client',
+        exclude: path.join(__dirname, 'node_modules'), // 排除node_modules内容 __dirname写法防止'bindings' of null报错
+        include: path.join(__dirname, 'client'),
         options: {
           presets: ['env']
         }
       },
-      //将小于1024d的图片转为base64，减少http请求
+      // 将小于1024d的图片转为base64，减少http请求
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
         use: [

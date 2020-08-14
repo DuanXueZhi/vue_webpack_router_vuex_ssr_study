@@ -30,6 +30,9 @@ const devServer = { // 端口ip：默认8080，localhost
   overlay: {
     errors: true
   },
+  historyApiFallback: {
+    index: '/public/index.html' // 指向生成的index.html
+  },
   hot: true
 }
 
