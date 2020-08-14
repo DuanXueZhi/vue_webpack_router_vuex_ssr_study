@@ -7,11 +7,14 @@ import './assets/styles/style.styl'
 import './assets/styles/global.styl'
 
 import createRouter from './config/router'
+import store from './store/store'
+import Vuex from 'vuex'
 
 // const root = document.createElement('div')
 // document.body.appendChild(root)
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
 const router = createRouter()
 
@@ -39,5 +42,6 @@ router.afterEach((to, from) => {
 
 new Vue({
   router, // 注入
+  store,
   render: (h) => h(App)
 }).$mount('#root')
