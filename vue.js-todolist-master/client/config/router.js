@@ -25,9 +25,9 @@ export default () => {
       } else { // 没有保存的位置
         return { x: 0, y: 0 }
       }
-    },
-    parseQuery (query) {}, // parse【自定义】
-    stringifyQuery (obj) {}, // stringify【自定义】
-    fallback: true // 不支持不跳转刷新的浏览器vue自动改为hash模式
+    }
+    // parseQuery (query) {}, // parse【自定义】
+    // stringifyQuery (obj) {} // stringify【自定义】
+    // fallback: true // 不支持不跳转刷新的浏览器vue自动改为hash模式
   })
 }

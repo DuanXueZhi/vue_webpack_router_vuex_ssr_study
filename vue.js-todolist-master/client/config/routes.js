@@ -12,10 +12,20 @@ export default [
   },
   {
     path: '/app',
-    component: Todo
+    component: Todo,
+    name: 'app',
+    meta: { // 通过.meta获取
+      title: 'this app'
+    },
+    children: [
+      {
+        path: 'test',
+        component: Login
+      }
+    ]
   },
   {
-    path: '/login',
+    path: '/login/:id',
     component: Login
   },
   {
