@@ -19,7 +19,9 @@ const definePlugins = [
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
-  new HTMLPlugin()
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  })
 ]
 
 const devServer = { // 端口ip：默认8080，localhost
@@ -39,13 +41,13 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
     module: {
       rules: [
         {
-          //css预处理器，使用模块化的方式写css代码
-          //stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
+          // css预处理器，使用模块化的方式写css代码
+          // stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
           test: /\.styl/,
           use: [
             'vue-style-loader',
             { // 全局设置
-              loader: 'css-loader',
+              loader: 'css-loader'
               // options: {
               //   modules: {
               //     localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]' // 设置类名
@@ -64,14 +66,14 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
     devServer,
     plugins: definePlugins.concat([
       new webpack.HotModuleReplacementPlugin(),
-      new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
+      new VueLoaderPlugin() // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
       // new webpack.NoEmitOnErrorsPlugin() // webpack4 内置
     ])
   })
 } else { // 正式环境
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/index.js')
       // vendor: ['vue']
     },
     output: {
@@ -79,8 +81,8 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
     },
     module: {
       rules: [
-        //css预处理器，使用模块化的方式写css代码
-        //stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
+        // css预处理器，使用模块化的方式写css代码
+        // stylus-loader专门用来处理stylus文件，处理完成后变成css文件，交给css-loader.webpack的loader就是这样一级一级向上传递，每一层loader只处理自己关心的部分
         {
           test: /\.styl/,
           use: [
@@ -90,8 +92,8 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
                 // you can specify a publicPath here
                 // by default it uses publicPath in webpackOptions.output
                 publicPath: './',
-                hmr: process.env.NODE_ENV === 'development',
-              },
+                hmr: process.env.NODE_ENV === 'development'
+              }
             },
             'css-loader',
             {
@@ -116,7 +118,7 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
         // all options are optional
         filename: 'styles.[chunkhash].[name].css',
         chunkFilename: '[id].css',
-        ignoreOrder: false, // Enable to remove warnings about conflicting order
+        ignoreOrder: false // Enable to remove warnings about conflicting order
       })
     ])
   })
