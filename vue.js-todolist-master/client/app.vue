@@ -18,7 +18,7 @@
       <router-view />
     </transition>
     <Footer />
-    <router-view name="a" />
+<!--    <router-view name="a" />-->
   </div>
 </template>
 

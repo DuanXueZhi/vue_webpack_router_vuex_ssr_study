@@ -2,8 +2,6 @@
  *  * Created by dxz on 2020/8/14-9:57.
  * explain：
  */
-import Todo from '../views/todo/todo.vue'
-import Login from '../views/login/login.vue'
 import Test from '../views/test/test.vue'
 
 export default [
@@ -12,9 +10,9 @@ export default [
     redirect: '/app'
   },
   {
-    path: '/app',
+    path: '/app', // 非嵌套路由必须包含一个前导斜线字符
     components: {
-      default: Todo,
+      default: () => import('../views/todo/todo.vue'),
       a: Test
     },
     name: 'app',
@@ -26,7 +24,7 @@ export default [
     children: [
       {
         path: 'test',
-        component: Login
+        component: () => import('../views/login/login.vue')
       }
     ]
   },
@@ -42,13 +40,13 @@ export default [
       default: (route) => ({ id: route.query.b }) // 访问方式http://localhost:8080/base/login/abc?b=123
     },
     components: {
-      default: Login, // 【default：默认router-view】
-      a: Todo // 【a：router-view name="a"】
+      default: () => import('../views/login/login.vue'), // 【default：默认router-view】
+      a: () => import('../views/todo/todo.vue') // 【a：router-view name="a"】
     }
   },
   {
     path: '/login/exact',
-    component: Login
+    component: () => import('../views/login/login.vue')
   },
   {
     path: 'test',
