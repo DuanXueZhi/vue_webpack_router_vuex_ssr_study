@@ -4,6 +4,7 @@
  */
 import Todo from '../views/todo/todo.vue'
 import Login from '../views/login/login.vue'
+import Test from '../views/test/test.vue'
 
 export default [
   {
@@ -12,7 +13,10 @@ export default [
   },
   {
     path: '/app',
-    component: Todo,
+    components: {
+      default: Todo,
+      a: Test
+    },
     name: 'app',
     meta: { // 通过.meta获取
       title: 'this app'
@@ -31,10 +35,17 @@ export default [
     //   id: 123
     // },
     props: (route) => ({ id: route.query.b }), // 根据url路径传参
-    component: Login
+    components: {
+      default: Login,
+      a: Todo
+    }
   },
   {
     path: '/login/exact',
     component: Login
+  },
+  {
+    path: 'test',
+    component: Test
   }
 ]
