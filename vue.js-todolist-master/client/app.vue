@@ -19,7 +19,9 @@
     </transition>
     <Footer />
     <!--    <router-view name="a" />-->
+    <div>VueX</div>
     <p>{{ count }}</p>
+    <p>{{ fullName }}</p>
   </div>
 </template>
 
@@ -38,6 +40,9 @@ export default {
   computed: {
     count () {
       return this.$store.state.count
+    },
+    fullName () {
+      return this.$store.getters.fullName
     }
   },
   mounted () {
