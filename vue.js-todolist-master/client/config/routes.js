@@ -49,7 +49,7 @@ export default [
     component: () => import('../views/login/login.vue')
   },
   {
-    path: 'test',
+    path: '/test',
     component: Test
   }
 ]
