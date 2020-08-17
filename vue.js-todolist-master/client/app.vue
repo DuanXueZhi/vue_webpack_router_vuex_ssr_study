@@ -22,6 +22,8 @@
     <div>VueX</div>
     <p>{{ count }}</p>
     <p>{{ fullName }}</p>
+    <p>{{ textA }}</p>
+    <p>{{ textPlus }}</p>
   </div>
 </template>
 
@@ -38,6 +40,11 @@ export default {
     Header,
     Footer
   },
+  data () {
+    return {
+      interval: null
+    }
+  },
   computed: {
     // count () {
     //   return this.$store.state.count
@@ -53,23 +60,40 @@ export default {
     // }),
     // 3.
     ...mapState({
-      count: (state) => state.count
+      count: (state) => state.count,
+      textA: (state) => state.a.text
     }),
-    ...mapGetters(['fullName'])
+    ...mapGetters({
+      fullName: 'fullName',
+      textPlus: 'a/textPlus'
+    })
+    // textA () {
+    //   return this.$store.state.a.text // a模块
+    // }
   },
   mounted () {
     console.log(this.$store)
     // this.$store.dispatch('updateCountAsync', { num: 5, time: 1000 })
-    this.updateCountAsync({ num: 5, time: 1000 })
-    let i = 1
-    setInterval(() => {
-      // this.$store.commit('updateCount', i++)
-      this.updateCount(i++)
-    }, 1000)
+    // this.updateCountAsync({ num: 5, time: 1000 })
+    // let i = 1
+    // this.interval = setInterval(() => {
+    //   // this.$store.commit('updateCount', i++)
+    //   this.updateCount(i++)
+    // }, 1000)
+    // this.updateText('abc') // [vuex] unknown mutation type: updateText
+    this['a/updateText']('abc1')
+    this['a/add']()
+    // this['b/testAction']() // b模块没有namespaced不需要写模块名
+    this.testAction()
+  },
+  beforeDestroy () {
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
   },
   methods: {
-    ...mapActions(['updateCountAsync']),
-    ...mapMutations(['updateCount'])
+    ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
+    ...mapMutations(['updateCount', 'a/updateText']) // [vuex] unknown mutation type: updateText
   }
 }
 </script>
