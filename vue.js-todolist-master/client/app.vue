@@ -75,7 +75,7 @@ export default {
   },
   mounted () {
     console.log(this.$store)
-    // this.$store.dispatch('updateCountAsync', { num: 5, time: 1000 })
+    this.$store.dispatch('updateCountAsync', { num: 5, time: 1000 })
     // this.updateCountAsync({ num: 5, time: 1000 })
     // let i = 1
     // this.interval = setInterval(() => {

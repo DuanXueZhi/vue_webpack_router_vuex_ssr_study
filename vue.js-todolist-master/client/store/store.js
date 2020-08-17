@@ -60,7 +60,12 @@ export default () => {
           }
         }
       }
-    }
+    },
+    plugins: [ // 初始化会调用
+      (store) => {
+        console.log('my plugins invoked')
+      }
+    ]
   })
   if (module.hot) {
     module.hot.accept([ // 导入路径

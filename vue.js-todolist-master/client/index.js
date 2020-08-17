@@ -25,6 +25,20 @@ store.registerModule('c', { // 动态注册模块
   }
 })
 
+// store.unregisterModule('c') // 解绑c模块
+
+store.watch((state) => state.count, (newCount) => { // 参数1中依赖的值变化则调用2中的函数【参数一不能是定义好的getters】
+  console.log('newCount watched', newCount)
+})
+
+store.subscribe((mutations, state) => { // 订阅【监控mutations的变化】
+  console.log(mutations.type, state, mutations.payload, mutations)
+})
+
+store.subscribeAction((action, state) => {
+  console.log('subscribe actions', action.type, action.payload)
+})
+
 /**
  * 全局路由守卫
  */
@@ -49,6 +63,6 @@ router.afterEach((to, from) => {
 
 new Vue({
   router, // 注入
-  store,
+  store, // 注入
   render: (h) => h(App)
 }).$mount('#root')
