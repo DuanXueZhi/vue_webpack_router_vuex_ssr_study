@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
@@ -38,12 +39,23 @@ export default {
     Footer
   },
   computed: {
-    count () {
-      return this.$store.state.count
-    },
-    fullName () {
-      return this.$store.getters.fullName
-    }
+    // count () {
+    //   return this.$store.state.count
+    // },
+    // fullName () {
+    //   return this.$store.getters.fullName
+    // }
+    // 1.
+    // ...mapState(['count']),
+    // 2.
+    // ...mapState({
+    //   count: 'count'
+    // }),
+    // 3.
+    ...mapState({
+      count: (state) => state.count
+    }),
+    ...mapGetters(['fullName'])
   },
   mounted () {
     console.log(this.$store)
