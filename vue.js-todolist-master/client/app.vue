@@ -24,6 +24,7 @@
     <p>{{ fullName }}</p>
     <p>{{ textA }}</p>
     <p>{{ textPlus }}</p>
+    <p>{{ textC }}</p>
   </div>
 </template>
 
@@ -61,7 +62,8 @@ export default {
     // 3.
     ...mapState({
       count: (state) => state.count,
-      textA: (state) => state.a.text
+      textA: (state) => state.a.text,
+      textC: (state) => state.c.text
     }),
     ...mapGetters({
       fullName: 'fullName',

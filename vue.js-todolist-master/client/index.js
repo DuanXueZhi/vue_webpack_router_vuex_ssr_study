@@ -7,7 +7,7 @@ import './assets/styles/style.styl'
 import './assets/styles/global.styl'
 
 import createRouter from './config/router'
-import store from './store/store'
+import createStore from './store/store'
 import Vuex from 'vuex'
 
 // const root = document.createElement('div')
@@ -17,6 +17,13 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 
 const router = createRouter()
+const store = createStore()
+
+store.registerModule('c', { // 动态注册模块
+  state: {
+    text: 3
+  }
+})
 
 /**
  * 全局路由守卫
