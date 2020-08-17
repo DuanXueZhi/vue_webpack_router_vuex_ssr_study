@@ -20,7 +20,7 @@ export default () => {
   //     }
   //   }
   // })
-  return new Vuex.Store({
+  const store = new Vuex.Store({
     // strict: process.env.NODE_ENV !== 'production' // 严格模式，禁止（并警告）通过state.xxx修改变量，问题处理办法：https://vuex.vuejs.org/zh/guide/forms.html
     state: defaultState,
     mutations,
@@ -62,4 +62,25 @@ export default () => {
       }
     }
   })
+  if (module.hot) {
+    module.hot.accept([ // 导入路径
+      './state/state',
+      './mutations/mutations',
+      './getters/getters',
+      './actions/actions'
+    ], () => { // 再次导入
+      const newState = require('./state/state').default
+      const newMutations = require('./mutations/mutations').default
+      const newGetters = require('./getters/getters').default
+      const newActions = require('./actions/actions').default
+
+      store.hotUpdate({ // 开启动态更新加载模块
+        state: newState,
+        mutations: newMutations,
+        getters: newGetters,
+        actions: newActions
+      })
+    })
+  }
+  return store
 }

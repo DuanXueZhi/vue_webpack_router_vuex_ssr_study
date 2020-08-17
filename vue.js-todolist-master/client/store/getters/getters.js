@@ -4,6 +4,6 @@
  */
 export default {
   fullName (state) { // 依赖变量修改则修改
-    return `${state.firstName} ${state.lastName}`
+    return `${state.firstName}111 ${state.lastName}`
   }
 }
