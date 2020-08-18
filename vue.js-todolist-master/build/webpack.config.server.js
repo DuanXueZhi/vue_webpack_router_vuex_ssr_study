@@ -4,7 +4,7 @@
  */
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin') // webpack4相关 == webpack3 extract-text-webpack-plugin
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin') // webpack4相关 == webpack3 extract-text-webpack-plugin
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
@@ -15,8 +15,7 @@ const config = merge(baseConfig, {
   entry: path.join(__dirname, '../client/server-entry.js'),
   devtool: '#source-map',
   output: {
-    libraryTarget: 'commonjs2',
-    libraryExport: 'commonjs2', // module.export模式
+    libraryTarget: 'commonjs2', // module.export模式
     filename: 'server-entry.js',
     path: path.join(__dirname, '../server-build')
   },
@@ -26,15 +25,15 @@ const config = merge(baseConfig, {
       {
         test: /\.styl/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it uses publicPath in webpackOptions.output
-              publicPath: './',
-              hmr: process.env.NODE_ENV === 'development'
-            }
-          },
+          // {
+          //   loader: MiniCssExtractPlugin.loader,
+          //   options: {
+          //     // you can specify a publicPath here
+          //     // by default it uses publicPath in webpackOptions.output
+          //     publicPath: './',
+          //     hmr: process.env.NODE_ENV === 'development'
+          //   }
+          // },
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -47,14 +46,14 @@ const config = merge(baseConfig, {
   },
   plugins: [
     new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
-    // new webpack.NoEmitOnErrorsPlugin() // webpack4 内置
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // all options are optional
-      filename: 'styles.[chunkhash].[name].css',
-      chunkFilename: '[id].css',
-      ignoreOrder: false // Enable to remove warnings about conflicting order
-    }),
+    // new webpack.NoEmitOnErrorsPlugin(), // webpack4 内置
+    // new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // all options are optional
+    //   filename: 'styles.[chunkhash].[name].css',
+    //   chunkFilename: '[id].css',
+    //   ignoreOrder: false // Enable to remove warnings about conflicting order
+    // }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'

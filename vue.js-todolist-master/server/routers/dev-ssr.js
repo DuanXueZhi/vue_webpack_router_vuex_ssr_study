@@ -44,17 +44,19 @@ const handleSSR = async (ctx) => {
 
   // 跨服务获取文件
   const clientManifestResp = await axios.get(
-    'http://127.0.0.1:8080/vue-ssr-client-manifest.json'
+    'http://127.0.0.1:8080/public/vue-ssr-client-manifest.json'
   )
   const clientManifest = clientManifestResp.data
 
   const template = fs.readFileSync(
-    path.join(__dirname, '../server.template.ejs')
+    path.join(__dirname, '../server.template.ejs'),
+    'utf-8'
   )
 
   const renderer = VueServerRenderer
     .createBundleRenderer(bundle, {
-      inject: false // 是否需要注入其他内容，仅渲染
+      inject: false, // 是否需要注入其他内容，仅渲染
+      clientManifest
     })
 
   await serverRenderer(ctx, renderer, template)

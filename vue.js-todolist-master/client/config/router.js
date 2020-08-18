@@ -16,7 +16,7 @@ export default () => {
   return new Router({
     routes,
     mode: 'history',
-    base: '/base/', // 所有path前端增加，router-link等跳转自动添加
+    // base: '/base/', // 所有path前端增加，router-link等跳转自动添加
     linkActiveClass: 'active-link', // class模糊匹配路由
     linkExactActiveClass: 'exact-active-link', // class精确匹配路由
     scrollBehavior: (to, from, savePosition) => {
