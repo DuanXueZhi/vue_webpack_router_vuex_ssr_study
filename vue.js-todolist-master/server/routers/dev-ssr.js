@@ -11,6 +11,7 @@ const webpack = require('webpack')
 const VueServerRenderer = require('vue-server-renderer')
 
 // 获取配置
+const serverRenderer = require('./server-render')
 const serverConfig = require('../../build/webpack.config.server')
 
 // 编译webpack
@@ -23,7 +24,7 @@ serverCompiler.watch({}, (err, stats) => { // 监听文件变化
   if (err) throw err
   stats = stats.toJson()
   stats.errors.forEach(err => console.log(err))
-  stats.hasWarnings.forEach(warn => console.warn(err))
+  stats.warnings.forEach(warn => console.warn(err))
 
   const bundlePath = path.join(
     serverConfig.output.path,
@@ -31,10 +32,11 @@ serverCompiler.watch({}, (err, stats) => { // 监听文件变化
   )
 
   bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
+  console.log('new bundle generated')
 })
 
 // 处理返回内容
-const handleSS = async (ctx) => {
+const handleSSR = async (ctx) => {
   if (bundle) {
     ctx.body = '等一会，别着急。。。'
     return
@@ -54,4 +56,11 @@ const handleSS = async (ctx) => {
     .createBundleRenderer(bundle, {
       inject: false // 是否需要注入其他内容，仅渲染
     })
+
+  await serverRenderer(ctx, renderer, template)
 }
+
+const router = new Router()
+router.get('*', handleSSR)
+
+module.exports = router
