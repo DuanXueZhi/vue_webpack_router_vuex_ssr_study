@@ -37,7 +37,7 @@ serverCompiler.watch({}, (err, stats) => { // 监听文件变化
 
 // 处理返回内容
 const handleSSR = async (ctx) => {
-  if (bundle) {
+  if (!bundle) {
     ctx.body = '等一会，别着急。。。'
     return
   }

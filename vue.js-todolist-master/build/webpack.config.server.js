@@ -15,6 +15,7 @@ const config = merge(baseConfig, {
   entry: path.join(__dirname, '../client/server-entry.js'),
   devtool: '#source-map',
   output: {
+    libraryTarget: 'commonjs2',
     libraryExport: 'commonjs2', // module.export模式
     filename: 'server-entry.js',
     path: path.join(__dirname, '../server-build')
