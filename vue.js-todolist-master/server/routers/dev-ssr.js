@@ -52,6 +52,6 @@ const handleSS = async (ctx) => {
 
   const renderer = VueServerRenderer
     .createBundleRenderer(bundle, {
-      inject: false // 不需要注入其他内容，仅渲染
+      inject: false // 是否需要注入其他内容，仅渲染
     })
 }
