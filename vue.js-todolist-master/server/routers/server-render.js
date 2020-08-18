@@ -17,10 +17,15 @@ module.exports = async (ctx, renderer, template) => {
   try {
     const appString = await renderer.renderToString(context) // 渲染的结果
 
+    const {
+      title
+    } = context.meta.inject() // 获取自定义meta
+
     const html = ejs.render(template, { // 通过ejs渲染
       appString,
       style: context.renderStyles(), // 带有style标签的整个字符串【插入html】
-      scripts: context.renderScripts() // script标签
+      scripts: context.renderScripts(), // script标签
+      title: title.text() // 使用自定义meta中的自定义title
     })
 
     ctx.body = html // 返回html内容
