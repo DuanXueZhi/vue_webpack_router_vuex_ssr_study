@@ -11,7 +11,7 @@ const config = {
   mode: process.env.NODE_ENV || 'production', // development || production || none
   target: 'web', // String | function(compiler编译者) // 为目标（target）指定环境【默认为web】
   // 入口， __dirname 是当前文件所在目录
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   // 输出
   output: {
     filename: 'bundle.[hash:8].js',

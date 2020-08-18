@@ -37,6 +37,9 @@ import Footer from './layout/footer.jsx'
 console.log(Header.__docs)
 
 export default {
+  metaInfo: {
+    title: 'app custom title'
+  },
   components: {
     Header,
     Footer
