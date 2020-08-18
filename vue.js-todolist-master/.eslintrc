@@ -7,6 +7,7 @@
     "parser": "babel-eslint"
   },
   "rules": {
-    "no-new": "off"
+    "no-new": "off",
+    "space-before-function-paren": [2, "never"]
   }
 }

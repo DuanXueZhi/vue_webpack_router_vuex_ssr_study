@@ -24,7 +24,8 @@
     <p>{{ fullName }}</p>
     <p>{{ textA }}</p>
     <p>{{ textPlus }}</p>
-    <p>{{ textC }}</p>
+    <!--<p>{{ textC }}</p>-->
+    <notification content="test notify" />
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
     Header,
     Footer
   },
-  data () {
+  data() {
     return {
       interval: null
     }
@@ -76,7 +77,7 @@ export default {
     //   return this.$store.state.a.text // a模块
     // }
   },
-  mounted () {
+  mounted() {
     console.log(this.$store)
     this.$store.dispatch('updateCountAsync', { num: 5, time: 1000 })
     // this.updateCountAsync({ num: 5, time: 1000 })
@@ -91,7 +92,7 @@ export default {
     // this['b/testAction']() // b模块没有namespaced不需要写模块名
     this.testAction()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.interval) {
       clearInterval(this.interval)
     }

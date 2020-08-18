@@ -30,21 +30,21 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       states: ['all', 'active', 'completed']
     }
   },
   computed: {
-    unfinishedTodo: function () {
+    unfinishedTodo: function() {
       return this.todos.filter(todo => todo.completed === false)
     }
   },
   methods: {
-    clearAllCompleted () {
+    clearAllCompleted() {
       this.$emit('clearAll')
     },
-    toggleFilter (state) {
+    toggleFilter(state) {
       this.$emit('toggle', state)
     }
   }

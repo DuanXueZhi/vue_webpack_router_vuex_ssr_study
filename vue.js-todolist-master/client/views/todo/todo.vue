@@ -31,18 +31,18 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
-  beforeRouteEnter (to, from, next) { // 【获取数据】此时没有this
+  beforeRouteEnter(to, from, next) { // 【获取数据】此时没有this
     console.log('todo beforeRouteEnter', this)
     next(vm => { // next回调，进入组件后的回调
       console.log(vm)
     })
   },
-  beforeRouteUpdate (to, from, next) { // 路由参数更新调用【可以替换组件中watch】
+  beforeRouteUpdate(to, from, next) { // 路由参数更新调用【可以替换组件中watch】
     // 获取改变的参数信息
     console.log('todo beforeRouteUpdate')
     next()
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     console.log('todo beforeRouteLeave')
     if (global.confirm('are you sure?')) {
       next()
@@ -52,14 +52,14 @@ export default {
     Item,
     Tabs
   },
-  data () {
+  data() {
     return {
       todos: [],
       filter: 'all'
     }
   },
   computed: {
-    filterTodos () {
+    filterTodos() {
       if (this.filter === 'all') {
         return this.todos
       }
@@ -68,7 +68,7 @@ export default {
     }
   },
   methods: {
-    addTodo (e) {
+    addTodo(e) {
       this.todos.unshift({
         id: id++,
         content: e.target.value,
@@ -77,14 +77,14 @@ export default {
 
       e.target.value = ''
     },
-    deleteTodo (id) {
+    deleteTodo(id) {
       this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1)
     },
-    toggleFilter (state) {
+    toggleFilter(state) {
       console.log(state)
       this.filter = state
     },
-    clearAllCompletedTodo () {
+    clearAllCompletedTodo() {
       this.todos = this.todos.filter(todo => todo.completed === false)
     }
   }

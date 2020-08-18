@@ -3,7 +3,7 @@
  * explain：
  */
 export default {
-  updateCount (state, num) { // 只可接收'两个参数'其他参数放在num对象中
+  updateCount(state, num) { // 只可接收'两个参数'其他参数放在num对象中
     state.count = num
   }
 }

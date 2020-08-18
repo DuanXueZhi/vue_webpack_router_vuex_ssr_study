@@ -17,7 +17,7 @@ export default [
     },
     name: 'app',
     meta: { title: 'this app' }, // 通过.meta获取
-    beforeEnter (to, from, next) {
+    beforeEnter(to, from, next) {
       console.log('app route beforeEnter')
       next()
     },
