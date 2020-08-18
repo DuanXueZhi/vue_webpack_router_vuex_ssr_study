@@ -2,11 +2,11 @@
  *  * Created by dxz on 2020/8/17-14:26.
  * explain：
  */
-import { createApp } from './create-app'
+import createApp from './create-app'
 
 export default context => { // context server-render.js toString(context)
   return new Promise((resolve, reject) => {
-    const { app, router, store } = createApp()
+    const { app, router } = createApp()
 
     router.push(context.url)
 
