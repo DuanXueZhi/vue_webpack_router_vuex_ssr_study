@@ -1,2 +1,5 @@
 node_modules/
 .idea
+dist
+public
+server-build

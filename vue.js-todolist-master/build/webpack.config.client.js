@@ -82,7 +82,8 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
       // vendor: ['vue']
     },
     output: {
-      filename: '[name].[chunkhash:8].js'
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public'
     },
     module: {
       rules: [
