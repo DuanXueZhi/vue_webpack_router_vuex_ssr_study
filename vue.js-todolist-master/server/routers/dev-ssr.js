@@ -20,6 +20,7 @@ const mfs = new MemoryFS()
 serverCompiler.outputFileSystem = mfs // 指定serverCompiler输出目录
 
 let bundle
+// 启动serverCompiler编译bundle
 serverCompiler.watch({}, (err, stats) => { // 监听文件变化
   if (err) throw err
   stats = stats.toJson()
@@ -46,7 +47,7 @@ const handleSSR = async (ctx) => {
   const clientManifestResp = await axios.get(
     'http://127.0.0.1:8080/public/vue-ssr-client-manifest.json'
   )
-  const clientManifest = clientManifestResp.data
+  const clientManifest = clientManifestResp.data // 静态资源路径地址
 
   const template = fs.readFileSync(
     path.join(__dirname, '../server.template.ejs'),
@@ -56,10 +57,10 @@ const handleSSR = async (ctx) => {
   const renderer = VueServerRenderer
     .createBundleRenderer(bundle, {
       inject: false, // 是否需要注入其他内容，仅渲染
-      clientManifest
+      clientManifest // 处理资源依赖关系
     })
 
-  await serverRenderer(ctx, renderer, template)
+  await serverRenderer(ctx, renderer, template) // ./server-render.js
 }
 
 const router = new Router()
