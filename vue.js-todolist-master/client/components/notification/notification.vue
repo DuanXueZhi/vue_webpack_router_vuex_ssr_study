@@ -3,7 +3,10 @@
   explain:
 -->
 <template>
-  <transition name="fade">
+  <transition
+    name="fade"
+    @after-leave="afterLeave"
+  >
     <div
       v-show="visible"
       id="notification"
@@ -84,6 +87,10 @@ export default {
     handleClose(e) {
       e.preventDefault()
       this.$emit('close')
+    },
+
+    afterLeave() {
+      this.$emit('closed')
     }
 
     /*

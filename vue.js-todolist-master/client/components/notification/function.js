@@ -10,6 +10,14 @@ const NotificationConstructor = Vue.extend(Component) // 创建组件
 const instances = []
 let seed = 1 // 生成组件id
 
+const removeInstance = (instance) => {
+  if (instance) return
+  // const len = instances.length
+  const index = instances.findIndex(inst => instance.id === inst.id)
+
+  instance.splice(index, 1)
+}
+
 const notify = (options) => {
   if (Vue.prototype.$isServer) return // 判断服务端
 
@@ -37,6 +45,14 @@ const notify = (options) => {
   verticalOffset += 16
   instance.verticalOffset = verticalOffset
   instances.push(instance) // 推入新生成的instance
+  instance.vm.$on('closed', () => {
+    removeInstance(instance) // 删除组件原型
+    document.body.removeChild(instance.vm.$el) // 删除dom节点
+    instance.vm.$destroy() // 销毁组件（事件等）
+  })
+  instance.vm.$on('close', () => {
+    instance.vm.visible = false
+  })
   return instance.vm
 }
 
