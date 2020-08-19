@@ -1,6 +1,6 @@
 /**
  *  * Created by dxz on 2020/8/19-9:29.
- * explain：扩展组件的index.js
+ * explain：扩展组件的注册index.js
  */
 import Vue from 'vue'
 import Component from './func-notification'
@@ -43,7 +43,7 @@ const notify = (options) => {
   instance.id = id
   instance.vm = instance.$mount() // 不传节点，仅生成el对象，并没有插入dom中，节点div已生成
   document.body.appendChild(instance.vm.$el) // 插入节点
-  instance.vm.visible = true
+  instance.vm.visible = true // 修改扩展组件js功能中的visible数据
 
   let verticalOffset = 0
   instances.forEach(item => {

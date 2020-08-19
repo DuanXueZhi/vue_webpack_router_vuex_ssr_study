@@ -20,7 +20,7 @@ export default {
       verticalOffset: 0,
       autoClose: 5000,
       height: 0,
-      visible: false
+      visible: false // 扩展组件要使用，必须声明，否则无法生成响应式
     }
   },
   mounted() {
