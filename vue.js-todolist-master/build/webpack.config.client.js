@@ -32,6 +32,7 @@ const devServer = { // 端口ip：默认8080，localhost
   overlay: {
     errors: true
   },
+  headers: { 'Access-Control-Allow-Origin': '*' }, // 设置跨域【热更替跨域】
   historyApiFallback: {
     index: '/public/index.html' // 指向生成的index.html，与base中publicPath拼接
   },
