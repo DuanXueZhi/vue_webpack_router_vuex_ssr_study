@@ -1,8 +1,8 @@
 /**
  *  * Created by dxz on 2020/8/19-9:28.
- * explain：
+ * explain：扩展组件的js
  */
-import Notification from './notification'
+import Notification from './notification' // 与原组件使用同一dom
 
 export default {
   extends: Notification,
@@ -18,7 +18,9 @@ export default {
   data() {
     return {
       verticalOffset: 0,
-      autoClose: 3000
+      autoClose: 5000,
+      height: 0,
+      visible: false
     }
   },
   mounted() {
@@ -36,6 +38,10 @@ export default {
           this.visible = false
         }, this.autoClose)
       }
+    },
+
+    afterEnter() { // 覆盖原afterEnter
+      this.height = this.$el.offsetHeight
     }
   }
 }

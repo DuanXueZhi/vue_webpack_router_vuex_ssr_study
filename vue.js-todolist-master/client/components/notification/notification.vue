@@ -6,6 +6,7 @@
   <transition
     name="fade"
     @after-leave="afterLeave"
+    @after-enter="afterEnter"
   >
     <div
       v-show="visible"
@@ -91,7 +92,9 @@ export default {
 
     afterLeave() {
       this.$emit('closed')
-    }
+    },
+
+    afterEnter() {}
 
     /*
   * -------------------------------------- 图表数据处理+渲染 arrangeData*、makeCharts* --------------------------------------

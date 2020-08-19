@@ -1,6 +1,6 @@
 /**
  *  * Created by dxz on 2020/8/19-9:29.
- * explain：
+ * explain：扩展组件的index.js
  */
 import Vue from 'vue'
 import Component from './func-notification'
@@ -11,11 +11,17 @@ const instances = []
 let seed = 1 // 生成组件id
 
 const removeInstance = (instance) => {
-  if (instance) return
-  // const len = instances.length
+  if (!instance) return
+  const len = instances.length
   const index = instances.findIndex(inst => instance.id === inst.id)
 
-  instance.splice(index, 1)
+  instances.splice(index, 1)
+
+  if (len <= 1) return
+  const removeHeight = instance.vm.height
+  for (let i = index; i < len - 1; i++) { // 移动其后每一项
+    instances[i].verticalOffset = parseInt(instances[i].verticalOffset) - removeHeight - 16
+  }
 }
 
 const notify = (options) => {
@@ -29,14 +35,15 @@ const notify = (options) => {
   const instance = new NotificationConstructor({
     propsData: { ...rest }, // 传入调用时的参数【content, btn】
     data: {
-      autoClose: autoClose === undefined ? 3000 : autoClose
+      autoClose: autoClose === undefined ? 5000 : autoClose
     }
   })
 
   const id = `notification_${seed++}`
   instance.id = id
   instance.vm = instance.$mount() // 不传节点，仅生成el对象，并没有插入dom中，节点div已生成
-  document.body.appendChild(instance.vm.$el)
+  document.body.appendChild(instance.vm.$el) // 插入节点
+  instance.vm.visible = true
 
   let verticalOffset = 0
   instances.forEach(item => {
