@@ -12,6 +12,8 @@
       v-show="visible"
       id="notification"
       :style="style"
+      @mouseenter="clearTimer"
+      @mouseleave="createTimer"
     >
       <p>{{ fileExplain }}</p>
       <span class="content">{{ content }}</span>
@@ -94,7 +96,11 @@ export default {
       this.$emit('closed')
     },
 
-    afterEnter() {}
+    afterEnter() {},
+
+    clearTimer() {},
+
+    createTimer() {}
 
     /*
   * -------------------------------------- 图表数据处理+渲染 arrangeData*、makeCharts* --------------------------------------

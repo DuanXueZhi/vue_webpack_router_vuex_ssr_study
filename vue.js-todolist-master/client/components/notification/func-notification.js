@@ -27,9 +27,7 @@ export default {
     this.createTimer()
   },
   beforeDestroy() {
-    if (this.timer) {
-      clearTimeout(this.timer)
-    }
+    this.clearTimer()
   },
   methods: {
     createTimer() {
@@ -37,6 +35,12 @@ export default {
         this.timer = setTimeout(() => {
           this.visible = false
         }, this.autoClose)
+      }
+    },
+
+    clearTimer() {
+      if (this.timer) {
+        clearTimeout(this.timer)
       }
     },
 
