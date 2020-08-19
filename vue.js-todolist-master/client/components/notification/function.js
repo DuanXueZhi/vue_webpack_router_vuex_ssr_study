@@ -13,8 +13,16 @@ let seed = 1 // 生成组件id
 const notify = (options) => {
   if (Vue.prototype.$isServer) return // 判断服务端
 
+  const {
+    autoClose,
+    ...rest // 剩余参数
+  } = options
+
   const instance = new NotificationConstructor({
-    propsData: options // 传入调用时的参数【content, btn】
+    propsData: { ...rest }, // 传入调用时的参数【content, btn】
+    data: {
+      autoClose: autoClose === undefined ? 3000 : autoClose
+    }
   })
 
   const id = `notification_${seed++}`

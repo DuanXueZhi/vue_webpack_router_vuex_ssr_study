@@ -17,7 +17,25 @@ export default {
   },
   data() {
     return {
-      verticalOffset: 0
+      verticalOffset: 0,
+      autoClose: 3000
+    }
+  },
+  mounted() {
+    this.createTimer()
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+    }
+  },
+  methods: {
+    createTimer() {
+      if (this.autoClose) {
+        this.timer = setTimeout(() => {
+          this.visible = false
+        }, this.autoClose)
+      }
     }
   }
 }

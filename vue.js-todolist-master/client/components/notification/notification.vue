@@ -5,6 +5,7 @@
 <template>
   <transition name="fade">
     <div
+      v-show="visible"
       id="notification"
       :style="style"
     >
@@ -34,7 +35,8 @@ export default {
   },
   data() {
     return {
-      fileExplain: '文件说明' // 文件说明
+      fileExplain: '文件说明', // 文件说明
+      visible: true
     }
   },
   computed: {
