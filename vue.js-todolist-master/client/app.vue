@@ -26,6 +26,9 @@
     <p>{{ textPlus }}</p>
     <!--<p>{{ textC }}</p>-->
     <notification content="test notify" />
+    <button @click="notify">
+      notify
+    </button>
   </div>
 </template>
 
@@ -91,6 +94,10 @@ export default {
     this['a/add']()
     // this['b/testAction']() // b模块没有namespaced不需要写模块名
     this.testAction()
+    this.$notify({
+      content: 'test notify',
+      btn: 'close'
+    })
   },
   beforeDestroy() {
     if (this.interval) {
@@ -99,7 +106,14 @@ export default {
   },
   methods: {
     ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
-    ...mapMutations(['updateCount', 'a/updateText']) // [vuex] unknown mutation type: updateText
+    ...mapMutations(['updateCount', 'a/updateText']), // [vuex] unknown mutation type: updateText
+    notify() {
+      const now = new Date()
+      this.$notify({
+        content: `test notify${now}`,
+        btn: 'close'
+      })
+    }
   }
 }
 </script>

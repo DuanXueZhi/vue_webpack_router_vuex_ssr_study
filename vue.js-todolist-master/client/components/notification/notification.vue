@@ -4,7 +4,10 @@
 -->
 <template>
   <transition name="fade">
-    <div id="notification">
+    <div
+      id="notification"
+      :style="style"
+    >
       <p>{{ fileExplain }}</p>
       <span class="content">{{ content }}</span>
       <a
@@ -32,6 +35,11 @@ export default {
   data() {
     return {
       fileExplain: '文件说明' // 文件说明
+    }
+  },
+  computed: {
+    style() {
+      return {}
     }
   },
   beforeCreate() {
