@@ -11,6 +11,7 @@ import App from './app.vue'
 import createStore from './store/store'
 import createRouter from './config/router'
 import Notification from './components/notification/index'
+import Tabs from './components/tabs'
 
 import './assets/styles/global.styl'
 
@@ -18,6 +19,7 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(Meta)
 Vue.use(Notification)
+Vue.use(Tabs)
 
 export default () => { // 返回函数每次调用都重新创建，否则容易出现内存溢出
   const router = createRouter()
