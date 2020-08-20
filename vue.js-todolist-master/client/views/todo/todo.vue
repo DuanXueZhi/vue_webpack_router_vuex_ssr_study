@@ -1,7 +1,10 @@
 <template>
   <section class="real-app">
     <div class="tab-container">
-      <tabs value="1">
+      <tabs
+        :value="tabValue"
+        @change="handleChangeTab"
+      >
         <tab
           label="tab1"
           index="1"
@@ -73,7 +76,8 @@ export default {
   data() {
     return {
       todos: [],
-      filter: 'all'
+      filter: 'all',
+      tabValue: '1'
     }
   },
   computed: {
@@ -84,6 +88,12 @@ export default {
       const filterCompleted = this.filter === 'completed'
       return this.todos.filter(todo => todo.completed === filterCompleted)
     }
+  },
+  mounted() {0
+    console.log('todo mounted')
+    // setTimeout(() => {
+    //   this.tabValue = '2'
+    // }, 2000)
   },
   methods: {
     addTodo(e) {
@@ -104,6 +114,9 @@ export default {
     },
     clearAllCompletedTodo() {
       this.todos = this.todos.filter(todo => todo.completed === false)
+    },
+    handleChangeTab(value) {
+      this.tabValue = value
     }
   }
 }

@@ -11,9 +11,16 @@ export default {
       default: 'tab'
     }
   },
+  // inject: ['value'],
   computed: {
     active() {
-      return false
+      return this.$parent.value === this.index
+      // return this.value === this.index
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$parent.onChange(this.index)
     }
   },
   render(h) {
@@ -23,7 +30,7 @@ export default {
       active: this.active // 选中状态
     }
     return (
-      <li class={classNames}>
+      <li class={classNames} on-click={this.handleClick}>
         {tab}
       </li>
     )

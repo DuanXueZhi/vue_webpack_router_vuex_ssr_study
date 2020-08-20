@@ -1,6 +1,11 @@
 import './style.styl'
 export default {
   name: 'Tabs',
+  // provide() { // 其下子组件都可以收到
+  //   return {
+  //     value: this.value // 此时的value并不是relative
+  //   }
+  // },
   props: {
     value: { // 控制显示哪个tab
       type: [String, Number],
@@ -10,6 +15,11 @@ export default {
   data() {
     return {
       fileExplain: '文件说明' // 文件说明
+    }
+  },
+  methods: {
+    onChange(index) {
+      this.$emit('change', index)
     }
   },
   render(h) {
