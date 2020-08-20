@@ -14,7 +14,8 @@ export default {
   },
   data() {
     return {
-      fileExplain: '文件说明' // 文件说明
+      fileExplain: '文件说明', // 文件说明
+      panes: []
     }
   },
   methods: {
@@ -23,11 +24,17 @@ export default {
     }
   },
   render(h) {
+    const contents = this.panes.map(pane => {
+      return pane.active ? pane.$slots.default : null
+    })
     return (
       <div class='tabs'>
         <ul class='tabs-header'>
           {this.$slots.default} {/* 调用时slot中的内容 */}
         </ul>
+        <div class='tab-content'>
+          {contents}
+        </div>
       </div>
     )
   }

@@ -8,17 +8,22 @@
         <tab
           label="tab1"
           index="1"
-        />
+        >
+          <span>tab content 1</span>
+        </tab>
         <tab index="2">
           <span
             slot="label"
             style="color: red;"
           >tab2</span>
+          <span>tab content 2</span>
         </tab>
         <tab
           label="tab3"
           index="3"
-        />
+        >
+          <span>tab content 3</span>
+        </tab>
       </tabs>
     </div>
     <input
@@ -89,7 +94,7 @@ export default {
       return this.todos.filter(todo => todo.completed === filterCompleted)
     }
   },
-  mounted() {0
+  mounted() {
     console.log('todo mounted')
     // setTimeout(() => {
     //   this.tabValue = '2'
