@@ -6,6 +6,16 @@ const Router = require('koa-router')
 
 const apiRouter = new Router({ prefix: '/api' }) // 定制前缀
 
+// 判断登录状态
+const validateUser = async(ctx, next) => {
+  if (!ctx.session.user) {
+    ctx.status = 401
+    ctx.body = 'need login'
+  } else {
+    await next()
+  }
+}
+
 // 设置返回固定格式
 const successResponse = (data) => {
   return {
@@ -16,7 +26,7 @@ const successResponse = (data) => {
 
 // router对象可链式调用
 apiRouter
-  .get('/todos', async(ctx) => {
+  .get('/todos', validateUser, async(ctx) => {
     const todos = await ctx.db.getAllTodos()
     ctx.body = successResponse(todos)
   })

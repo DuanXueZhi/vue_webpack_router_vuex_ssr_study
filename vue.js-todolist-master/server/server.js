@@ -23,7 +23,7 @@ app.keys = ['vue ssr tech']
 app.use(koaSession({
   key: 'v-ssr-id',
   maxAge: 2 * 60 * 1000 // 2小时过期时间
-}))
+}, app))
 
 const isDev = process.env.NODE_ENV === 'development'
 
