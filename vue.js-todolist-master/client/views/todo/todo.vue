@@ -6,27 +6,17 @@
         @change="handleChangeTab"
       >
         <tab
-          label="tab1"
-          index="1"
+          v-for="tab in stats"
+          :key="tab"
+          :label="tab"
+          :index="tab"
         >
-          <span>tab content 1</span>
-        </tab>
-        <tab index="2">
-          <span
-            slot="label"
-            style="color: red;"
-          >tab2</span>
-          <span>tab content 2</span>
-        </tab>
-        <tab
-          label="tab3"
-          index="3"
-        >
-          <span>tab content 3</span>
+          <span>tab content 1{{ inputContent }}</span>
         </tab>
       </tabs>
     </div>
     <input
+      v-model="inputContent"
       type="text"
       class="add-input"
       autofocus="autofocus"
@@ -51,7 +41,7 @@
 
 <script>
 import Item from './item.vue'
-import Helper from './tabs.vue'
+import Helper from './helper.vue'
 // import { constants } from 'crypto'
 
 let id = 0
@@ -82,7 +72,9 @@ export default {
     return {
       todos: [],
       filter: 'all',
-      tabValue: '1'
+      tabValue: 'all',
+      inputContent: '123',
+      stats: ['all', 'active', 'completed']
     }
   },
   computed: {
