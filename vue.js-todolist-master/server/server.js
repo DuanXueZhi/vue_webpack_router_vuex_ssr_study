@@ -6,6 +6,7 @@ const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
 const koaBody = require('koa-body')
+const koaSession = require('koa-session')
 
 const staticRouter = require('./routers/static')
 const apiRouter = require('./routers/api')
@@ -17,6 +18,12 @@ const db = createDb(config.db.appId, config.db.appKey)
 // const pageRouter = require('./routers/dev-ssr')
 
 const app = new Koa()
+
+app.keys = ['vue ssr tech']
+app.use(koaSession({
+  key: 'v-ssr-id',
+  maxAge: 2 * 60 * 1000 // 2小时过期时间
+}))
 
 const isDev = process.env.NODE_ENV === 'development'
 
