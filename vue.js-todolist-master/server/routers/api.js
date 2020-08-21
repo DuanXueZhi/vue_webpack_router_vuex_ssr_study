@@ -16,6 +16,8 @@ const validateUser = async(ctx, next) => {
   }
 }
 
+apiRouter.use(validateUser) // 所有请求使用中间件
+
 // 设置返回固定格式
 const successResponse = (data) => {
   return {

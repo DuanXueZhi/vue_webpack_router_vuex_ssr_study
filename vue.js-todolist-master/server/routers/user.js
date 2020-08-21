@@ -26,3 +26,5 @@ userRouter.post('/login', async ctx => {
     }
   }
 })
+
+module.exports = userRouter

@@ -10,6 +10,7 @@ const koaSession = require('koa-session')
 
 const staticRouter = require('./routers/static')
 const apiRouter = require('./routers/api')
+const userRouter = require('./routers/user')
 const createDb = require('./db/db') // 全局引用db文件
 const config = require('../app.config')
 
@@ -19,10 +20,10 @@ const db = createDb(config.db.appId, config.db.appKey)
 
 const app = new Koa()
 
-app.keys = ['vue ssr tech']
+app.keys = ['vue ssr tech'] // 加密key
 app.use(koaSession({
   key: 'v-ssr-id',
-  maxAge: 2 * 60 * 1000 // 2小时过期时间
+  maxAge: 2 * 60 * 1000 // 2小时过期时间，服务端无法主动过期json-web-token
 }, app))
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -60,6 +61,7 @@ app.use(async(ctx, next) => {
 })
 
 app.use(koaBody())
+app.use(userRouter.routes()).use(userRouter.allowedMethods())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods()) // 使/api开头的请求都进如apiRouter中处理
 
