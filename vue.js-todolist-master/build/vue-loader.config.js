@@ -13,11 +13,11 @@ module.exports = (isDev) => {
     //   camelCase: true // 将css中变量名横杠连接方式改为驼峰命名
     // },
     // postcss 全局已配置
-    hotReload: true, // 是否热重载（默认true：可局部更新，false：刷新整个页面更新【可能有vue-style-loader重载style样式】）
+    // hotReload: true, // 是否热重载（默认true：可局部更新，false：刷新整个页面更新【可能有vue-style-loader重载style样式】）
     loaders: { // 指定loader解析自定义docs标签
       'docs': docsLoader
-    },
-    preLoader: {}, // 先使用的loader
-    postLoader: {} // 后使用的loader
+    }
+    // preLoader: {}, // 先使用的loader
+    // postLoader: {} // 后使用的loader
   }
 }
