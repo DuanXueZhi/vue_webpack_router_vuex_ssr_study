@@ -42,6 +42,25 @@ module.exports = (appId, appKey) => { // 需要调用初始化
     },
     async addTodo(todo) {
       return handleRequest(await request.post(`/${className}`, todo, { headers: getHeaders() }))
+    },
+    async updateTodo(id, todo) {
+      return handleRequest(await request.put(`/${className}/${id}`, todo, { headers: getHeaders() }))
+    },
+    async deleteTodo(id) {
+      return handleRequest(await request.delete(`/${className}/${id}`, { headers: getHeaders() }))
+    },
+    async deleteCompleted(ids) {
+      const requests = ids.map(id => {
+        return {
+          method: 'DELETE',
+          path: `/mcm/api/${className}/${id}`
+        }
+      })
+      return handleRequest(await request.post(
+        '/batch', // 批处理操作
+        { requests },
+        { headers: getHeaders() }
+      ))
     }
   }
 }
