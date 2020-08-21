@@ -7,6 +7,11 @@ const send = require('koa-send')
 const path = require('path')
 
 const staticRouter = require('./routers/static')
+const apiRouter = require('./routers/api')
+const createDb = require('./db/db') // 全局引用db文件
+const config = require('../app.config')
+
+const db = createDb(config.db.appId, config.db.appKey)
 
 // const pageRouter = require('./routers/dev-ssr')
 
@@ -18,7 +23,7 @@ const isDev = process.env.NODE_ENV === 'development'
  * 中间件
  */
 // 错误处理
-app.use(async (ctx, next) => {
+app.use(async(ctx, next) => {
   try {
     console.log(`request with path ${ctx.path}`)
     await next()
@@ -33,7 +38,12 @@ app.use(async (ctx, next) => {
   }
 })
 
-app.use(async (ctx, next) => {
+app.use(async(ctx, next) => {
+  ctx.db = db
+  await next()
+})
+
+app.use(async(ctx, next) => {
   if (ctx.path === '/favicon.ico') {
     await send(ctx, '/favicon.ico', { root: path.join(__dirname, '../') })
   } else {
@@ -42,6 +52,7 @@ app.use(async (ctx, next) => {
 })
 
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+app.use(apiRouter.routes()).use(apiRouter.allowedMethods()) // 使/api开头的请求都进如apiRouter中处理
 
 let pageRouter
 if (isDev) {
@@ -49,6 +60,7 @@ if (isDev) {
 } else {
   pageRouter = require('./routers/ssr')
 }
+
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
 const HOST = process.env.HOST || '0.0.0.0'
