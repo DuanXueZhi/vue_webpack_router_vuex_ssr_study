@@ -20,6 +20,11 @@ const handleRequest = (request) => {
         return reject(createError(400, data.message))
       }
       resolve(data.data) // axios请求默认包一层data
+    }).catch(err => {
+      const resp = err.response
+      if (resp.status === 401) {
+        reject(createError(401, err.message))
+      }
     })
   })
 }

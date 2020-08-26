@@ -3,9 +3,15 @@
  * explain：处理异步修改数据方法
  */
 import model from '../../model/client-model'
+import notify from '../../components/notification/function'
 
-const handleError = () => {
-
+const handleError = (err) => {
+  // 处理401未登录
+  if (err.code === 401) {
+    notify({
+      content: '未登录'
+    })
+  }
 }
 
 export default {
