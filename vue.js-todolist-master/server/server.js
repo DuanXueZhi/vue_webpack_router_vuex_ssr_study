@@ -22,7 +22,7 @@ const app = new Koa()
 
 app.keys = ['vue ssr tech'] // 加密key
 app.use(koaSession({
-  key: 'v-ssr-id',
+  key: 'v-ssr-id', // 【在set-cookie中】
   maxAge: 2 * 60 * 1000 // 2小时过期时间，服务端无法主动过期json-web-token
 }, app))
 

@@ -19,6 +19,9 @@ userRouter.post('/login', async ctx => {
       }
     }
   } else {
+    ctx.session.user = {
+      username: 'username400'
+    }
     ctx.status = 400
     ctx.body = {
       success: false,
