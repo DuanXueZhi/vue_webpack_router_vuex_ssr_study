@@ -21,7 +21,7 @@
       class="add-input"
       autofocus="autofocus"
       placeholder="接下来做什么"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAdd"
     >
     <Item
       v-for="todo in filterTodos"
@@ -45,7 +45,7 @@ import Item from './item.vue'
 import Helper from './helper.vue'
 // import { constants } from 'crypto'
 
-let id = 0
+// let id = 0
 
 export default {
   beforeRouteEnter(to, from, next) { // 【获取数据】此时没有this
