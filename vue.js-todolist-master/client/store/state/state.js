@@ -5,5 +5,6 @@
 export default {
   count: 0,
   firstName: 'd',
-  lastName: 'xz'
+  lastName: 'xz',
+  todos: []
 }

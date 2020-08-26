@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
 // import { constants } from 'crypto'
@@ -70,7 +71,7 @@ export default {
   },
   data() {
     return {
-      todos: [],
+      // todos: [],
       filter: 'all',
       tabValue: 'all',
       inputContent: '123',
@@ -78,6 +79,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['todos']),
     filterTodos() {
       if (this.filter === 'all') {
         return this.todos
@@ -91,8 +93,10 @@ export default {
     // setTimeout(() => {
     //   this.tabValue = '2'
     // }, 2000)
+    this.fetchTodos()
   },
   methods: {
+    ...mapActions(['fetchTodos']),
     addTodo(e) {
       this.todos.unshift({
         id: id++,
