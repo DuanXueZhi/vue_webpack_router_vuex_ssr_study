@@ -23,11 +23,14 @@ export default {
     }, data.time)
   },
   fetchTodos({ commit }) {
+    commit('startLoading')
     model.getAllTodos()
       .then(data => {
+        commit('endLoading')
         commit('fillTodos', data)
       })
       .catch(err => {
+        commit('endLoading')
         return handleError(err)
       })
   },

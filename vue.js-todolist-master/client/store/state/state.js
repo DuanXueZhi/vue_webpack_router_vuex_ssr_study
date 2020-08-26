@@ -7,5 +7,6 @@ export default {
   firstName: 'd',
   lastName: 'xz',
   todos: [],
-  user: null
+  user: null,
+  loading: false
 }

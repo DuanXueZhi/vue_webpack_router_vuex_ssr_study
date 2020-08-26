@@ -32,6 +32,12 @@
     <button @click="notify">
       notify
     </button>
+    <div
+      v-show="loading"
+      id="loading"
+    >
+      <loading />
+    </div>
   </div>
 </template>
 
@@ -39,6 +45,7 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
+import Loading from './components/loading/loading'
 // import Todo from './views/todo/todo.vue'
 
 console.log(Header.__docs)
@@ -49,7 +56,8 @@ export default {
   },
   components: {
     Header,
-    Footer
+    Footer,
+    Loading
   },
   data() {
     return {
@@ -72,7 +80,8 @@ export default {
     // 3.
     ...mapState({
       count: (state) => state.count,
-      textA: (state) => state.a.text
+      textA: (state) => state.a.text,
+      loading: (state) => state.loading
       // textC: (state) => state.c.text
     }),
     ...mapGetters({
@@ -137,4 +146,16 @@ export default {
         background-color #999
         opacity 0.2
         z-index -1
+  #loading{
+    position fixed
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background-color rgba(255,255,255,.3)
+    z-index 99
+    display flex
+    align-items center
+    justify-content center
+  }
 </style>
