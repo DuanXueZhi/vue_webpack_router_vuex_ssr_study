@@ -4,6 +4,7 @@
  */
 import model from '../../model/client-model'
 import notify from '../../components/notification/function'
+import bus from '../../utils/bus'
 
 const handleError = (err) => {
   // 处理401未登录
@@ -11,6 +12,7 @@ const handleError = (err) => {
     notify({
       content: '未登录'
     })
+    bus.$emit('auth')
   }
 }
 
