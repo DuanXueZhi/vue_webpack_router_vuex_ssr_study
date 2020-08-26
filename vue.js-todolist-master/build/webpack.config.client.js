@@ -36,6 +36,10 @@ const devServer = { // 端口ip：默认8080，localhost
   historyApiFallback: {
     index: '/public/index.html' // 指向生成的index.html，与base中publicPath拼接
   },
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+    '/user': 'http://127.0.0.1:3333'
+  },
   hot: true
 }
 
