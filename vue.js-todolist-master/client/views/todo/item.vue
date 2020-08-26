@@ -4,6 +4,8 @@
       v-model="todo.completed"
       type="checkbox"
       class="toggle"
+      :checked="todo.completed"
+      @click="handleToggle"
     >
     <label>{{ todo.content }}</label>
     <button
@@ -24,6 +26,10 @@ export default {
   methods: {
     deleteTodo() {
       this.$emit('del', this.todo.id)
+    },
+    handleToggle(e) {
+      e.preventDefault() // 阻止其默认选中操作【需要通过改变数据而改变状态】
+      this.$emit('toggle', this.todo)
     }
   }
 }

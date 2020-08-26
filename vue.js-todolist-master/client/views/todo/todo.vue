@@ -28,6 +28,7 @@
       :key="todo.id"
       :todo="todo"
       @del="deleteTodo"
+      @toggle="toggleTodoState(todo)"
     />
     <helper
       :filter="filter"
@@ -96,25 +97,51 @@ export default {
     this.fetchTodos()
   },
   methods: {
-    ...mapActions(['fetchTodos']),
-    addTodo(e) {
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value,
+    ...mapActions([
+      'fetchTodos',
+      'addTodo',
+      'updateTodo',
+      'deleteTodo',
+      'deleteAllCompleted'
+    ]),
+    handleAdd(e) {
+      const content = e.target.value.trim()
+      if (!content) {
+        this.$notify({
+          content: '内容不能为空'
+        })
+        return
+      }
+      // this.todos.unshift({
+      //   id: id++,
+      //   content: e.target.value,
+      //   completed: false
+      // })
+      const todo = {
+        content,
         completed: false
-      })
-
+      }
+      this.addTodo(todo)
       e.target.value = ''
     },
-    deleteTodo(id) {
-      this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1)
+    // deleteTodo(id) {
+    //   this.todos.splice(this.todos.findIndex(todo => id === todo.id), 1)
+    // },
+    toggleTodoState(todo) {
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
     },
     toggleFilter(state) {
       console.log(state)
       this.filter = state
     },
     clearAllCompletedTodo() {
-      this.todos = this.todos.filter(todo => todo.completed === false)
+      // this.todos = this.todos.filter(todo => todo.completed === false)
+      this.deleteAllCompleted()
     },
     handleChangeTab(value) {
       this.tabValue = value
