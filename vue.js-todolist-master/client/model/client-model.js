@@ -32,5 +32,8 @@ const handleRequest = (request) => {
 export default {
   getAllTodos() {
     return handleRequest(request.get('/api/todos'))
+  },
+  login(username, password) {
+    return handleRequest(request.post('/user/login', { username, password }))
   }
 }

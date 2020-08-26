@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   beforeRouteEnter(to, from, next) { // 【可以获取数据】此时没有this
     console.log('login beforeRouteEnter', this)
@@ -61,10 +62,17 @@ export default {
     console.log('login mounted', this.id)
   },
   methods: {
+    ...mapActions(['login']),
     doSubmit(e) {
       e.preventDefault() // 移除默认提交、跳转页面
       if (this.validate()) {
         // 调用接口
+        this.login({
+          username: this.username,
+          password: this.password
+        }).then(() => {
+          this.$router.replace('/app') // replace跳转浏览器不可回退
+        })
       }
     },
     validate() {

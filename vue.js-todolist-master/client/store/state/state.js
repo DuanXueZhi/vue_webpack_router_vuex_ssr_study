@@ -6,5 +6,6 @@ export default {
   count: 0,
   firstName: 'd',
   lastName: 'xz',
-  todos: []
+  todos: [],
+  user: null
 }

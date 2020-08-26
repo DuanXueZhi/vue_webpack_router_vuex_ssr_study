@@ -30,5 +30,21 @@ export default {
       .catch(err => {
         return handleError(err)
       })
+  },
+  login({ commit }, { username, password }) {
+    return new Promise((resolve, reject) => { // 要与页面有耦合操作
+      model.login(username, password)
+        .then(data => {
+          commit('doLogin', data)
+          notify({
+            content: '登录成功'
+          })
+          resolve()
+        })
+        .catch((err) => {
+          handleError(err)
+          reject(err)
+        })
+    })
   }
 }
