@@ -135,4 +135,10 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
   })
 }
 
+// config.resolve = {
+//   alias: {
+//     model: path.join(__dirname, '../client/model/client-model.js')
+//   }
+// }
+
 module.exports = config
