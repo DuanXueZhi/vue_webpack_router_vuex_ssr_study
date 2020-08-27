@@ -5,7 +5,11 @@
 import createApp from './create-app'
 import bus from './utils/bus'
 
-const { app, router } = createApp()
+const { app, router, store } = createApp()
+
+if (window.__INITAL_STATE__) {
+  store.replaceState(window.__INITAL_STATE__)
+}
 
 bus.$on('auth', () => {
   router.push('/login')

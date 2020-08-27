@@ -9,10 +9,10 @@ const ejs = require('ejs')
  * @param template：模板
  * @returns {Promise<void>}
  */
-module.exports = async (ctx, renderer, template) => {
+module.exports = async(ctx, renderer, template) => {
   ctx.headers['Content-Type'] = 'text/html'
 
-  const context = { url: ctx.path } // 【传入vue-server-render】客户端路径、js路径、css路径\style标签直接插入html
+  const context = { url: ctx.path, user: ctx.session.user } // 【传入vue-server-render】客户端路径、js路径、css路径\style标签直接插入html
 
   try {
     const appString = await renderer.renderToString(context) // 渲染的结果
@@ -25,7 +25,8 @@ module.exports = async (ctx, renderer, template) => {
       appString,
       style: context.renderStyles(), // 带有style标签的整个字符串【插入html】
       scripts: context.renderScripts(), // script标签
-      title: title.text() // 使用自定义meta中的自定义title
+      title: title.text(), // 使用自定义meta中的自定义title
+      initalState: context.renderState() // 将store/state中的数据拿出来，放入renderState中
     })
 
     ctx.body = html // 返回html内容

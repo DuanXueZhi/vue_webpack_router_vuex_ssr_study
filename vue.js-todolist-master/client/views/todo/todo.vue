@@ -94,11 +94,16 @@ export default {
     // setTimeout(() => {
     //   this.tabValue = '2'
     // }, 2000)
-    this.fetchTodos()
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
   // eslint-disable-next-line vue/order-in-components
   asyncData({ store }) {
-    return store.dispatch('fetchTodos')
+    if (store.state.user) { // 登录判断
+      return store.dispatch('fetchTodos')
+    }
+    return Promise.resolve()
   },
   methods: {
     ...mapActions([

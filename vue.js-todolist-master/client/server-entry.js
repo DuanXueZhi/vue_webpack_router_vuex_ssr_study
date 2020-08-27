@@ -8,6 +8,10 @@ export default context => { // context server-render.js toString(context)
   return new Promise((resolve, reject) => {
     const { app, router, store } = createApp()
 
+    if (context.user) {
+      store.state.user = context.user
+    }
+
     router.push(context.url) // 区分路由
 
     router.onReady(() => { // 完成所有异步操作后
@@ -25,6 +29,7 @@ export default context => { // context server-render.js toString(context)
       })).then(data => {
         console.log(store.state)
         context.meta = app.$meta() // 使用自定义meta
+        context.state = store.state
         resolve(app)
       })
     })
