@@ -67,10 +67,11 @@ app.use(apiRouter.routes()).use(apiRouter.allowedMethods()) // 使/api开头的�
 
 let pageRouter
 if (isDev) {
-  // pageRouter = require('./routers/dev-ssr')
-  pageRouter = require('./routers/dev-ssr-no-bundle')
+  pageRouter = require('./routers/dev-ssr')
+  // pageRouter = require('./routers/dev-ssr-no-bundle')
 } else {
-  pageRouter = require('./routers/ssr')
+  // pageRouter = require('./routers/ssr')
+  pageRouter = require('./routers/ssr-no-bundle')
 }
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())

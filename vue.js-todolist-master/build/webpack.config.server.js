@@ -8,7 +8,29 @@ const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-// const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueServerPlugin = require('vue-server-renderer/server-plugin')
+
+const isDev = process.env.NODE_ENV === 'development'
+
+const plugins = [
+  new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
+  // new webpack.NoEmitOnErrorsPlugin(), // webpack4 内置
+  // new MiniCssExtractPlugin({
+  //   // Options similar to the same options in webpackOptions.output
+  //   // all options are optional
+  //   filename: 'styles.[chunkhash].[name].css',
+  //   chunkFilename: '[id].css',
+  //   ignoreOrder: false // Enable to remove warnings about conflicting order
+  // }),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.VUE_ENV': '"server"'
+  })
+]
+
+if (isDev) {
+  plugins.push(new VueServerPlugin())
+}
 
 const config = merge(baseConfig, {
   target: 'node',
@@ -44,22 +66,7 @@ const config = merge(baseConfig, {
       }
     ]
   },
-  plugins: [
-    new VueLoaderPlugin(), // 与vue-loader有关，不引入则报错：vue-loader was used without the corresponding plugin. Make sure to include VueLoaderPlugin in your webpack config. 提示引入
-    // new webpack.NoEmitOnErrorsPlugin(), // webpack4 内置
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // all options are optional
-    //   filename: 'styles.[chunkhash].[name].css',
-    //   chunkFilename: '[id].css',
-    //   ignoreOrder: false // Enable to remove warnings about conflicting order
-    // }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"server"'
-    })
-    // new VueServerPlugin() // 使用bundleRender时需要声明
-  ]
+  plugins
 })
 
 // config.resolve = {
