@@ -23,6 +23,7 @@ export default context => { // context server-render.js toString(context)
         if (Component.asyncData) { // 匹配组件中asyncData（option）
           return Component.asyncData({
             route: router.currentRoute,
+            router,
             store
           })
         }
@@ -30,6 +31,7 @@ export default context => { // context server-render.js toString(context)
         console.log(store.state)
         context.meta = app.$meta() // 使用自定义meta
         context.state = store.state
+        context.router = router
         resolve(app)
       })
     })

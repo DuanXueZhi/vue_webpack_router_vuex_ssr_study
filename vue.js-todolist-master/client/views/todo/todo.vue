@@ -99,10 +99,11 @@ export default {
     }
   },
   // eslint-disable-next-line vue/order-in-components
-  asyncData({ store }) {
+  asyncData({ store, router }) {
     if (store.state.user) { // 登录判断
       return store.dispatch('fetchTodos')
     }
+    router.replace('/login')
     return Promise.resolve()
   },
   methods: {

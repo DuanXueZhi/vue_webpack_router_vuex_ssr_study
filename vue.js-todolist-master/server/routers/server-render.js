@@ -17,6 +17,10 @@ module.exports = async(ctx, renderer, template) => {
   try {
     const appString = await renderer.renderToString(context) // 渲染的结果
 
+    if (context.router.currentRoute.fullPath !== ctx.path) {
+      return ctx.redirect(context.router.currentRoute.fullPath) // 重定向
+    }
+
     const {
       title
     } = context.meta.inject() // 获取自定义meta
