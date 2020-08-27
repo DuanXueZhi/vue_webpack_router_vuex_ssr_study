@@ -8,7 +8,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-const VueServerPlugin = require('vue-server-renderer/server-plugin')
+// const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 const config = merge(baseConfig, {
   target: 'node',
@@ -57,8 +57,8 @@ const config = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
-    }),
-    new VueServerPlugin()
+    })
+    // new VueServerPlugin() // 使用bundleRender时需要声明
   ]
 })
 

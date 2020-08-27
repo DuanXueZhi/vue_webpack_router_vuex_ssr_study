@@ -24,7 +24,7 @@ export default [
     children: [
       {
         path: 'test',
-        component: () => import('../views/login/login.vue')
+        component: () => import('../views/login/login.vue') // 异步加载写入运存
       }
     ]
   },
