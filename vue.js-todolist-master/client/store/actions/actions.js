@@ -3,6 +3,7 @@
  * explain：处理异步修改数据方法
  */
 import model from '../../model/client-model'
+// import model from 'model'
 import notify from '../../components/notification/function'
 import bus from '../../utils/bus'
 
@@ -24,7 +25,7 @@ export default {
   },
   fetchTodos({ commit }) {
     commit('startLoading')
-    model.getAllTodos()
+    return model.getAllTodos()
       .then(data => {
         commit('endLoading')
         commit('fillTodos', data)

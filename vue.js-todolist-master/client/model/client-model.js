@@ -7,6 +7,7 @@ import { createError } from './utils'
 
 const request = axios.create({
   baseURL: '/'
+  // baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:3333/' : '/' // 服务端发送请求无法携带cookie且不是默认增加域名
 })
 
 const handleRequest = (request) => {

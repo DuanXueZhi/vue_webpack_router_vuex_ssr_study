@@ -6,7 +6,7 @@ import createApp from './create-app'
 
 export default context => { // context server-render.js toString(context)
   return new Promise((resolve, reject) => {
-    const { app, router } = createApp()
+    const { app, router, store } = createApp()
 
     router.push(context.url) // 区分路由
 
@@ -15,8 +15,18 @@ export default context => { // context server-render.js toString(context)
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
-      context.meta = app.$meta() // 使用自定义meta
-      resolve(app)
+      Promise.all(matchedComponents.map(Component => {
+        if (Component.asyncData) { // 匹配组件中asyncData（option）
+          return Component.asyncData({
+            route: router.currentRoute,
+            store
+          })
+        }
+      })).then(data => {
+        console.log(store.state)
+        context.meta = app.$meta() // 使用自定义meta
+        resolve(app)
+      })
     })
   })
 }

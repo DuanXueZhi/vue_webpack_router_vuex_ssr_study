@@ -89,12 +89,16 @@ export default {
       return this.todos.filter(todo => todo.completed === filterCompleted)
     }
   },
-  mounted() {
+  mounted() { // 服务端渲染不会执行到mounted，仅执行到beforeMounted
     console.log('todo mounted')
     // setTimeout(() => {
     //   this.tabValue = '2'
     // }, 2000)
     this.fetchTodos()
+  },
+  // eslint-disable-next-line vue/order-in-components
+  asyncData({ store }) {
+    return store.dispatch('fetchTodos')
   },
   methods: {
     ...mapActions([

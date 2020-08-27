@@ -16,5 +16,29 @@
         "allowFirstLine": false
       }
     }]
+  },
+  "env": {
+    "browser": {
+      "presets": [
+        [
+          "env", {
+            "targets": {
+              "browsers": ["last 2 version", "safair >= 7"]
+            }
+        }
+        ]
+      ]
+    },
+    "node": {
+      "presets": [
+        [
+          "env", {
+            "targets": {
+              "browsers": "current"
+            }
+        }
+        ]
+      ]
+    }
   }
 }
