@@ -130,7 +130,8 @@ if (isDev) { // 开发环境 // 合理合并base中的配置
         filename: 'styles.[chunkhash].[name].css',
         chunkFilename: '[id].css',
         ignoreOrder: false // Enable to remove warnings about conflicting order
-      })
+      }),
+      new webpack.NamedChunksPlugin() // 结合routes中的注释，定制打包名称
     ])
   })
 }

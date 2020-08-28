@@ -12,7 +12,7 @@ export default [
   {
     path: '/app', // 非嵌套路由必须包含一个前导斜线字符
     components: {
-      default: () => import('../views/todo/todo.vue'),
+      default: () => import(/* webpackChunkName "todo-view" */ '../views/todo/todo.vue'),
       a: Test
     },
     name: 'app',
@@ -24,7 +24,7 @@ export default [
     children: [
       {
         path: 'test',
-        component: () => import('../views/login/login.vue') // 异步加载写入运存
+        component: () => import(/* webpackChunkName "login-view" */ '../views/login/login.vue') // 异步加载写入运存
       }
     ]
   },
@@ -46,7 +46,7 @@ export default [
   },
   {
     path: '/login/exact',
-    component: () => import('../views/login/login.vue')
+    component: () => import(/* webpackChunkName "login-view-exact" */ '../views/login/login.vue')
   },
   {
     path: '/test',
